@@ -31,3 +31,4 @@ for i in soup.find_all('div', class_='cell item'):
     items.append(item)
     # print(item)
 
+print(items)
