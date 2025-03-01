@@ -1,0 +1,27 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo-v2
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root  # 初始化root用户名
+      MONGO_INITDB_ROOT_PASSWORD: root  # 初始化root密码
+    volumes:
+      - ./mongo_data:/data/db  # 持久化数据到命名卷
+    network_mode: bridge
+    ports:
+      - "27017:27017"  # 暴露默认MongoDB端口
+  
+  v2spider:
+    image: v2spider:0.2
+    container_name: v2spider
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    volumes:
+      - ./main.py:/app/main.py
+      - ./mainPage.py:/app/mainPage.py
+      - ./subPage.py:/app/subPage.py
+      - ./utils:/app/utils
+    network_mode: host
+    # command: python /app/main.py

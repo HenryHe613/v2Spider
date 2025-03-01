@@ -1,0 +1,15 @@
+async-timeout==5.0.1
+beautifulsoup4==4.12.3
+certifi==2024.8.30
+charset-normalizer==3.4.0
+dnspython==2.7.0
+html5lib==1.1
+idna==3.10
+pymongo==4.11.1
+python-dotenv==1.0.1
+redis==5.2.1
+requests==2.32.3
+six==1.16.0
+soupsieve==2.6
+urllib3==2.2.3
+webencodings==0.5.1
