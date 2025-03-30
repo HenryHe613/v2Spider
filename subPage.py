@@ -1,6 +1,7 @@
 import re
 import requests
 from bs4 import BeautifulSoup
+from utils.log_utils import LOG
 from utils.date_utils import parse_date
 
 def subPage(path:str):

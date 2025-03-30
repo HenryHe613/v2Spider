@@ -1,23 +1,12 @@
 services:
-  mongo:
-    image: mongo:latest
-    container_name: mongo-v2
-    restart: unless-stopped
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root  # 初始化root用户名
-      MONGO_INITDB_ROOT_PASSWORD: root  # 初始化root密码
-    volumes:
-      - ./mongo_data:/data/db  # 持久化数据到命名卷
-    network_mode: bridge
-    ports:
-      - "27017:27017"  # 暴露默认MongoDB端口
-  
   v2spider:
-    image: v2spider:0.2
-    container_name: v2spider
+    # image: v2spider:0.2
+    build: .
+    container_name: v2-spider
     restart: unless-stopped
-    depends_on:
-      - mongo
+    # depends_on:
+    #   - mongo
+    #   - redis
     volumes:
       - ./main.py:/app/main.py
       - ./mainPage.py:/app/mainPage.py
@@ -25,3 +14,28 @@ services:
       - ./utils:/app/utils
     network_mode: host
     # command: python /app/main.py
+
+  # mongo:
+  #   image: mongo:latest
+  #   container_name: v2-mongo
+  #   restart: unless-stopped
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root  # 初始化root用户名
+  #     MONGO_INITDB_ROOT_PASSWORD: root  # 初始化root密码
+  #   volumes:
+  #     - ./mongo_data:/data/db  # 持久化数据到命名卷
+  #   network_mode: bridge
+  #   ports:
+  #     - "27017:27017"  # 暴露默认MongoDB端口
+  
+  # redis:
+  #   image: redis/redis-stack:latest
+  #   container_name: v2-redis
+  #   network_mode: bridge
+  #   ports:
+  #     - "6379:6379"
+  #     - "8001:8001"
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./redis_data:/data
+    
